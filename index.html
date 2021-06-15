@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/novaTarefa" method="POST">
+        <input type="text" name="name" placeholder="Name of your ONG" required>
+        <input type="email" name="email" placeholder="Email" required>
+      
+        <button type="submit">Register</button>
+      </form>
+    <main>
+
+    </main>
+</body>
+
+<script>
+
+    async function getcontent() {
+        try {
+            const response = await fetch('http://localhost:4000/tarefas');
+            const data = await response.json();
+            show(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+     getcontent()
+
+     function show(tasks) {
+        
+        let output = ''
+
+        for( let task of tasks){
+            output += `<br>${task.id}<br>${task.tarefa}<br>${task.descricao}<br>${task.responsavel}`
+        }
+
+        document.querySelector('main').innerHTML = output
+    }
+</script>
+</html>
